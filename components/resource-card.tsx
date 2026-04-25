@@ -1,4 +1,5 @@
 "use client"
+
 import { ExternalLink, FileText, Mic, Video, TrendingUp, BookOpen, Calendar, Eye, Star, ThumbsUp, ThumbsDown } from "lucide-react"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -10,27 +11,37 @@ interface ResourceCardProps {
   viewCount: number
   score: number
   onView: () => void
-  onVote: (type: 'like' | 'dislike') => void
+  onVote: (type: "like" | "dislike") => void
 }
 
 export function ResourceCard({ resource, viewCount, score, onView, onVote }: ResourceCardProps) {
   const getIcon = () => {
     switch (resource.type) {
-      case "paper": return FileText
-      case "podcast": return Mic
-      case "video": return Video
-      case "news": return TrendingUp
-      default: return BookOpen
+      case "paper":
+        return FileText
+      case "podcast":
+        return Mic
+      case "video":
+        return Video
+      case "news":
+        return TrendingUp
+      default:
+        return BookOpen
     }
   }
 
   const getTypeColor = () => {
     switch (resource.type) {
-      case "paper": return "bg-blue-50 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300"
-      case "podcast": return "bg-purple-50 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300"
-      case "video": return "bg-red-50 text-red-700 dark:bg-red-900/50 dark:text-red-300"
-      case "news": return "bg-red-50 text-red-700 dark:bg-red-900/50 dark:text-red-300" // Changed from green to red
-      default: return "bg-gray-50 text-gray-700 dark:bg-gray-900/50 dark:text-gray-300"
+      case "paper":
+        return "bg-blue-50 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300"
+      case "podcast":
+        return "bg-purple-50 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300"
+      case "video":
+        return "bg-red-50 text-red-700 dark:bg-red-900/50 dark:text-red-300"
+      case "news":
+        return "bg-red-50 text-red-700 dark:bg-red-900/50 dark:text-red-300"
+      default:
+        return "bg-gray-50 text-gray-700 dark:bg-gray-900/50 dark:text-gray-300"
     }
   }
 
@@ -49,18 +60,16 @@ export function ResourceCard({ resource, viewCount, score, onView, onVote }: Res
         <h3 className="mt-2 text-lg font-semibold line-clamp-2">{resource.title}</h3>
       </CardHeader>
 
-      <CardContent className="flex flex-col flex-1">
+      <CardContent className="flex flex-1 flex-col">
         <div className="space-y-3">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <span className="font-medium">{resource.author}</span>
-            <span>•</span>
+            <span>&bull;</span>
             <Calendar className="h-4 w-4" />
             <span>{resource.date}</span>
           </div>
 
-          {resource.description && (
-            <p className="text-sm text-muted-foreground line-clamp-3">{resource.description}</p>
-          )}
+          {resource.description && <p className="text-sm text-muted-foreground line-clamp-3">{resource.description}</p>}
         </div>
 
         {resource.tags && resource.tags.length > 0 && (
@@ -78,32 +87,21 @@ export function ResourceCard({ resource, viewCount, score, onView, onVote }: Res
 
       <CardFooter className="flex flex-wrap items-center justify-between gap-4 border-t pt-4">
         <div className="flex items-center gap-4 text-sm text-muted-foreground">
-          <span className="flex items-center gap-1"><Eye className="h-4 w-4" /> {viewCount}</span>
-          <span className="flex items-center gap-1"><Star className="h-4 w-4" /> {score}</span>
+          <span className="flex items-center gap-1">
+            <Eye className="h-4 w-4" /> {viewCount}
+          </span>
+          <span className="flex items-center gap-1">
+            <Star className="h-4 w-4" /> {score}
+          </span>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <Button 
-            variant="outline" 
-            size="sm" 
-            className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white flex-shrink-0" 
-            onClick={() => onVote('like')}
-          >
+          <Button variant="outline" size="sm" className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white flex-shrink-0" onClick={() => onVote("like")}>
             <ThumbsUp className="h-4 w-4 mr-1" /> Like
           </Button>
-          <Button 
-            variant="outline" 
-            size="sm" 
-            className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white flex-shrink-0" 
-            onClick={() => onVote('dislike')}
-          >
+          <Button variant="outline" size="sm" className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white flex-shrink-0" onClick={() => onVote("dislike")}>
             <ThumbsDown className="h-4 w-4 mr-1" /> Dislike
           </Button>
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-200 flex-shrink-0" 
-            onClick={onView}
-          >
+          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-200 flex-shrink-0" onClick={onView}>
             Read More
             <ExternalLink className="ml-2 h-4 w-4" />
           </Button>
