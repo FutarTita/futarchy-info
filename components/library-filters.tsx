@@ -41,9 +41,9 @@ export function LibraryFilters({
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex items-center gap-3">
           <Filter className="h-5 w-5 text-muted-foreground" />
-          <h2 className="text-lg font-semibold">Filter Resources</h2>
+          <h2 className="text-lg font-semibold">Browse the archive</h2>
           {activeFilters.length > 0 && (
-            <Badge variant="secondary" className="ml-2 bg-red-900/30 text-black dark:text-red-300">
+            <Badge variant="secondary" className="ml-2 bg-primary/10 text-foreground dark:text-primary">
               {activeFilters.length} active
             </Badge>
           )}
@@ -56,8 +56,8 @@ export function LibraryFilters({
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="recent">Most Recent</SelectItem>
-              <SelectItem value="oldest">Oldest First</SelectItem>
+              <SelectItem value="recent">Newest by emission date</SelectItem>
+              <SelectItem value="oldest">Oldest by emission date</SelectItem>
               <SelectItem value="popular">Most Popular</SelectItem>
               <SelectItem value="relevant">Most Relevant</SelectItem>
             </SelectContent>
@@ -88,7 +88,7 @@ export function LibraryFilters({
             <Button key={category.id} variant={isActive ? "default" : "outline"} className="gap-2" onClick={() => toggleFilter(category.id)}>
               <Icon className="h-4 w-4" />
               {category.label}
-              <Badge variant="secondary" className="bg-red-900/30 text-black dark:text-red-300">
+              <Badge variant="secondary" className="bg-primary/10 text-foreground dark:text-primary">
                 {category.count}
               </Badge>
             </Button>
@@ -100,8 +100,8 @@ export function LibraryFilters({
         <div className="flex items-center gap-3">
           <span className="text-sm text-muted-foreground">Active filters:</span>
           {activeFilters.map((filter) => (
-            <Badge key={filter} variant="secondary" className="cursor-pointer bg-red-900/30 text-black dark:text-red-300" onClick={() => toggleFilter(filter)}>
-              {filterCategories.find((c) => c.id === filter)?.label} ×
+            <Badge key={filter} variant="secondary" className="cursor-pointer bg-primary/10 text-foreground dark:text-primary" onClick={() => toggleFilter(filter)}>
+              {filterCategories.find((c) => c.id === filter)?.label} x
             </Badge>
           ))}
           <Button variant="ghost" size="sm" onClick={() => setActiveFilters([])}>
